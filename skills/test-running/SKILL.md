@@ -9,8 +9,11 @@ Use the closest project environment and the working directory that matches the c
 
 ## Core Rules
 
-- Invoke pytest via `python -m pytest`.
+- Invoke pytest via `{venv-activation-command} python -m pytest`.
 - Prefer the closest project virtual environment or the project's documented Python runner.
+- Treat local virtual environments such as `.venv` (or `venv`) as likely present even if file/glob
+  checks do not list them; they are normally gitignored and may be hidden from default
+  repository-scoped checks.
 - Run from the project directory that makes imports and config resolve correctly.
 - Start with the narrowest relevant target before expanding to a broader suite.
 
@@ -31,6 +34,9 @@ Use the closest project environment and the working directory that matches the c
 
 - In PowerShell, invoke local Python executables with `&`.
 - If the project documents a preferred command, use that command.
+- Try the local `.venv` (or `venv`) path directly before falling back to plain `python` when the
+  project convention suggests it exists, because ignored virtualenv files may not
+  appear in discovery results.
 - If the project uses a local venv, common patterns are:
 
 ```powershell
