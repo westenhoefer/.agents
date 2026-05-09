@@ -13,6 +13,7 @@ Prefer deliberate, durable structure over accidental reuse or local convenience.
 - Reviewing a plan or proposal that changes responsibilities or system boundaries.
 - Deciding whether behavior belongs in a shared abstraction or a local specialization.
 - Evaluating whether an existing pattern should be reused, tightened, or replaced.
+- After exploratory context gathering and before creating a specification for larger work.
 
 ## Instructions
 
@@ -31,6 +32,7 @@ Prefer deliberate, durable structure over accidental reuse or local convenience.
 - Use diagrams for component placement and call flow when structure is easier to see than to describe.
 - Use code snippets for interfaces, contracts, and signatures when precision matters.
 - Separate locked decisions from open questions.
+- Hand off to `create-specification` only after the main ownership, boundary, and contract decisions are clear.
 
 ## Review Checklist
 

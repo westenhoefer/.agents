@@ -1,85 +1,156 @@
 ---
 name: create-specification
-description: Turns a plan into an execution-ready specification with locked decisions, file-by-file changes, explicit verification, and detailed TODOs. Use when drafting or refining plans for non-trivial work, or when the user asks for a specification instead of ad-hoc implementation.
+description: Turns an approved direction into an implementation brief for a capable coding agent, including concrete verification commands. Use after architecture decisions are clear, or when work needs precise boundaries, contracts, algorithms, risks, and repo-correct test, lint, typecheck, or CI commands.
 ---
 
 # Create Specification
 
-A plan becomes a specification when the implementing agent does not need to invent important design decisions during execution.
+A specification should prevent architectural guessing, not remove all implementation judgment.
+
+Treat the implementing agent like a talented junior engineer: give it the system shape, ownership boundaries, contracts, invariants, pseudocode for tricky logic, and verification expectations. Let it choose routine edits that naturally follow from the codebase.
 
 ## When To Use
 
-- Drafting or refining a plan for multi-file, architectural, or cross-cutting work.
-- Turning a rough idea into a handoff document for implementation.
-- Reviewing an existing plan that still leaves meaningful choices to the implementer.
+- Turning a rough plan into an implementation-ready brief.
+- Handing off multi-file, architectural, or cross-cutting work.
+- Clarifying boundaries, APIs, data flow, algorithms, risks, or verification before implementation.
+- Reviewing a plan that may let behavior land in the wrong layer.
+- Capturing concrete verification commands after the repo environment and project root are understood.
 
-## Storage
+## Core Standard
 
-- If the project already has a canonical place for specs, use it.
-- Otherwise prefer an in-repo plan under `.cursor/plans/`.
-- If no convention is clear and the location matters, ask the user instead of creating a new convention silently.
+A good spec answers:
 
-## Specification Standard
+1. What are we building?
+2. Where does the responsibility belong?
+3. What public contracts or data shapes must exist?
+4. What algorithm or control flow matters?
+5. What must not happen?
+6. How will we know the implementation is correct?
 
-- Lock important names and paths. Do not leave module names, file locations, API shapes, or public identifiers to implementer choice.
-- Lock the intended architectural choice when there is an easy local workaround and a correct shared fix. Do not present both as acceptable implementation options.
-- Ask questions instead of making assumptions. Put unresolved items in an explicit `Open Questions` section.
-- Include diagrams when they clarify component placement, data flow, or ownership.
-- Include code blocks for interfaces, signatures, DTOs, and pseudocode when precision matters.
-- Include file-by-file modification instructions for every file to create or change.
-- Include tests in the same file-by-file style.
-- Include concrete verification commands.
-- Include detailed TODOs that are ordered, granular, and executable without more design work.
-- Rewrite vague phrases before finalizing: "prefer", "likely", "or", "if it gets crowded", "as configured", "where appropriate", and "the implementer can decide" usually signal that the spec still needs a locked decision.
-- If the user has chosen a direction, state it as a requirement and remove softer alternatives from the plan.
+Do not over-specify routine edits that a capable agent can infer from existing patterns.
 
 ## Required Sections
 
-1. Scope
-   - in scope
-   - out of scope
-2. Locked decisions
+1. Goal
+2. Scope
 3. Architecture
-4. Interfaces and behavior
-5. File-by-file changes
-6. Tests and verification
-7. Risks
-8. Open questions
-9. TODOs
+4. Locked Decisions
+5. Interfaces / Contracts
+6. Important Algorithms or Flows
+7. Implementation Notes
+8. Tests and Verification
+9. Risks and Open Questions
 
-## File-By-File Guidance
+## Section Guidance
 
-For each file:
+### Goal
 
-- use the full path
-- describe the concrete edits
-- specify key signatures, wiring changes, and removed assumptions
-- list test updates alongside production changes
-- say where behavior must not be implemented when that prevents a lazy workaround, e.g. "do not put access filtering in the router; implement it in the shared authorized reader."
+State the user-visible or system-level outcome in plain language.
+
+### Scope
+
+Separate in-scope from out-of-scope behavior. Keep this short.
+
+### Architecture
+
+Name the owning modules, layers, or services.
+
+Be explicit about:
+
+- where the behavior belongs
+- what inputs and outputs cross boundaries
+- what concerns must stay separate
+- what existing pattern should be reused or improved
+
+Use diagrams when structure or flow is easier to see visually.
+
+### Locked Decisions
+
+Lock decisions that affect architecture, public behavior, compatibility, persistence, APIs, or verification.
+
+Do not lock incidental implementation details unless choosing freely would produce materially different designs.
+
+### Interfaces / Contracts
+
+Include concrete signatures, DTOs, schema shapes, events, route shapes, command names, or configuration keys when they matter.
+
+Prefer code blocks for contracts that must be exact.
+
+### Important Algorithms or Flows
+
+Use pseudocode for non-trivial behavior.
+
+Pseudocode should capture:
+
+- ordering
+- branching
+- error handling
+- state transitions
+- idempotency or concurrency rules
+- fallback behavior, if any
+
+Do not write pseudocode for straightforward plumbing.
+
+### Implementation Notes
+
+Give targeted guidance, not a file-by-file script.
+
+Mention specific files only when:
+
+- ownership must be fixed
+- a public contract lives there
+- a risky area needs attention
+- a tempting local workaround must be rejected
+- tests must cover a specific shared seam
+
+Avoid exhaustive "edit this file, then this file" instructions unless the user explicitly asks for a mechanical handoff.
+
+### Tests and Verification
+
+Name the expected test coverage and concrete verification commands.
+
+Specify behavior to prove, not only files to modify.
+
+Include:
+
+- targeted unit tests
+- integration or workflow tests when behavior crosses boundaries
+- regression tests for bugs
+- the working directory for each command
+- the interpreter, virtual environment, package runner, or project script to use
+- typecheck, lint, test, or CI-like commands appropriate to the repo
+- what each command proves
+
+Use the `verification` skill when choosing commands. Do not write a bare command if the repo requires a local `.venv`, `venv`, project runner, script, or non-root working directory. Treat local virtual environments as possibly present even when ignored file listings do not show them.
+
+### Risks and Open Questions
+
+Call out unresolved product, architecture, migration, compatibility, or data questions.
+
+If a decision is unknown, ask rather than hiding uncertainty behind permissive wording.
 
 ## Anti-Patterns
 
-- "Use something like ..."
-- "Put this wherever it fits best"
-- "The implementer can decide"
-- "Prefer X, otherwise Y" when X is the correct architecture and Y is only easier.
-- "Likely A or B" for public names, route shapes, CLI commands, module paths, or ownership boundaries.
-- "As configured" without naming the exact argument, header, env var, setting, or dependency.
-- Listing the correct shared refactor and a local workaround as peer options.
-- file sections that omit tests
-- TODOs that merely repeat section titles
+- File-by-file instructions for obvious implementation work.
+- TODO lists that restate every section as a task.
+- "The implementer can decide" for architecture, ownership, public contracts, or algorithms.
+- "Prefer X, otherwise Y" when Y is only a shortcut around the right design.
+- Local wrappers that compensate for weak shared behavior without justifying why the shared seam should not change.
+- Vague phrases like "where appropriate", "as configured", "roughly", or "something like this" for important contracts.
+- Vague verification such as "run tests" when the repo-correct command, root, and environment can be determined.
+- Over-prescribing private helper names, internal ordering, or trivial refactors.
 
-## Ambiguity Pass
+## Final Pass
 
-Before handing off a specification, do a final pass that asks:
+Before handing off the spec, ask:
 
-1. Could an implementer satisfy this spec with a local workaround that preserves a weak shared default?
-2. Are there any slash-separated choices, parenthetical alternatives, or optional paths that should be one locked decision?
-3. Are ownership boundaries explicit enough to prevent behavior from landing in the router, adapter, DTO, or CLI just because that is convenient?
-4. Would two capable agents implement materially different architectures from this text?
+1. Could two capable agents implement materially different architectures from this?
+2. Is the owner of each important behavior clear?
+3. Are the public contracts precise enough?
+4. Is the tricky logic captured as pseudocode or flow?
+5. Are we micromanaging anything the agent can infer safely?
+6. Are verification commands concrete and repo-correct?
+7. Are tests focused on behavior and risk?
 
-If any answer is yes, tighten the spec before presenting it. If the correct choice is unknown, ask the user and keep it in `Open Questions`; do not hide the uncertainty in permissive wording.
-
-## Expected Output
-
-A good specification should let a capable implementing agent execute without guessing about structure, naming, or verification scope.
+Tighten architecture, contracts, and algorithms. Remove unnecessary low-level instructions.
