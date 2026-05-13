@@ -15,7 +15,8 @@ Prefer clear, typed, maintainable code over generated-code defensiveness.
 - Use pure functions for deterministic transformations when they make code simpler and easier to test.
 - Do not force purity where it makes orchestration awkward.
 - Use proper type hints, explicit data shapes, and clear contracts instead of runtime guessing.
-- Add useful comments for non-obvious decisions; do not comment obvious assignments.
+- Add useful comments for non-obvious decisions; explanatory comment blocks are expected for complex or unintuitive logic.
+- Treat existing explanatory comment blocks as intentional context. Do not remove them unless the underlying logic is simplified enough that the comment is no longer needed.
 
 ## Error Handling
 

@@ -38,9 +38,10 @@ Do not over-specify routine edits that a capable agent can infer from existing p
 4. Locked Decisions
 5. Interfaces / Contracts
 6. Important Algorithms or Flows
-7. Implementation Notes
-8. Tests and Verification
-9. Risks and Open Questions
+7. Relevant Skills
+8. Implementation Notes
+9. Tests and Verification
+10. Risks and Open Questions
 
 ## Section Guidance
 
@@ -91,6 +92,14 @@ Pseudocode should capture:
 - fallback behavior, if any
 
 Do not write pseudocode for straightforward plumbing.
+
+### Relevant Skills
+
+Point out any skills the implementing agent should read and follow before starting work.
+
+Include a skill when it materially affects implementation style, verification, review, architecture, cleanup, SDK usage, settings, hooks, rules, or other task-specific workflow.
+
+Name the skill and explain why it applies in one short phrase. Do not list unrelated skills just because they are available.
 
 ### Implementation Notes
 
@@ -152,5 +161,6 @@ Before handing off the spec, ask:
 5. Are we micromanaging anything the agent can infer safely?
 6. Are verification commands concrete and repo-correct?
 7. Are tests focused on behavior and risk?
+8. Are relevant skills named with clear instructions to follow them?
 
 Tighten architecture, contracts, and algorithms. Remove unnecessary low-level instructions.
