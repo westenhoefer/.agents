@@ -30,6 +30,16 @@ A good spec answers:
 
 Do not over-specify routine edits that a capable agent can infer from existing patterns.
 
+## RFC 2119 Language
+
+Use RFC 2119 style language for requirement strength:
+
+- Obligatory requirements MUST use `MUST` or `MUST NOT`.
+- Recommended guidance SHOULD use `SHOULD` or `SHOULD NOT`.
+- Optional guidance MAY use `MAY`.
+
+Use these keywords deliberately for implementation requirements, constraints, and verification expectations. Do not weaken required behavior with vague alternatives.
+
 ## Required Sections
 
 1. Goal
@@ -162,5 +172,6 @@ Before handing off the spec, ask:
 6. Are verification commands concrete and repo-correct?
 7. Are tests focused on behavior and risk?
 8. Are relevant skills named with clear instructions to follow them?
+9. Does requirement strength use RFC 2119 style language consistently?
 
 Tighten architecture, contracts, and algorithms. Remove unnecessary low-level instructions.
