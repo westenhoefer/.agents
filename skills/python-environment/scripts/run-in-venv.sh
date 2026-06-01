@@ -4,13 +4,14 @@ set -euo pipefail
 usage() {
   cat <<'EOF'
 Usage:
-  verify.sh <tool> [args...]
+  run-in-venv.sh <tool> [args...]
 
 Examples:
-  verify.sh pytest tests/test_example.py
-  verify.sh ruff check .
-  verify.sh pyright .
-  verify.sh python -m pytest tests/test_example.py
+  run-in-venv.sh python tests/test_example.py
+  run-in-venv.sh pytest tests/test_example.py
+  run-in-venv.sh ruff check .
+  run-in-venv.sh pyright .
+  run-in-venv.sh python -m pytest tests/test_example.py
 
 The script selects venv/ or .venv/, prepends its bin directory to PATH,
 and forwards all arguments to the requested tool.

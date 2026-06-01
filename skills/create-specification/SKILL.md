@@ -141,7 +141,7 @@ Include:
 - typecheck, lint, test, or CI-like commands appropriate to the repo
 - what each command proves
 
-Use the `verification` skill when choosing commands. Do not write a bare command if the repo requires a local `.venv`, `venv`, project runner, script, or non-root working directory. Treat local virtual environments as possibly present even when ignored file listings do not show them.
+Use the `verification` skill when choosing commands, and the `python-environment` skill for any Python command so it runs through the project's local virtual environment. Do not write a bare command if the repo requires a local `.venv`, `venv`, project runner, script, or non-root working directory. Treat local virtual environments as possibly present even when ignored file listings do not show them.
 
 ### Risks and Open Questions
 

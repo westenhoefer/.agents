@@ -6,13 +6,14 @@ param(
 function Show-Usage {
     @"
 Usage:
-  .\verify.ps1 <tool> [args...]
+  .\run-in-venv.ps1 <tool> [args...]
 
 Examples:
-  .\verify.ps1 pytest tests/test_example.py
-  .\verify.ps1 ruff check .
-  .\verify.ps1 pyright .
-  .\verify.ps1 python -m pytest tests/test_example.py
+  .\run-in-venv.ps1 python tests/test_example.py
+  .\run-in-venv.ps1 pytest tests/test_example.py
+  .\run-in-venv.ps1 ruff check .
+  .\run-in-venv.ps1 pyright .
+  .\run-in-venv.ps1 python -m pytest tests/test_example.py
 
 The script selects venv/ or .venv/, prepends its Scripts/bin directory to PATH,
 and forwards all arguments to the requested tool.

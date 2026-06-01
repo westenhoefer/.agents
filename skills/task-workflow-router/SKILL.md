@@ -31,6 +31,7 @@ Use top-level phase skills when the task calls for them:
 - Planning: `architecture-design`, then `create-specification`
 - Execution: `style-coding-guidelines`
 - Refactoring cleanup: `refactoring-cleanup`
+- Running Python commands: `python-environment`
 - Verification: `verification`
 - Review: `review`
 - Cleanup: `post-task-capture`

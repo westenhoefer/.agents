@@ -29,53 +29,9 @@ Before running or writing verification commands, identify:
 
 ## Python Guidance
 
-When no project-specific command is documented, use the wrapper scripts in this skill to avoid missing gitignored virtual environments:
+For any Python verification command, use the `python-environment` skill to run through the project's local virtual environment instead of the global interpreter. Never run a bare `python`, `pytest`, `ruff`, `pyright`, or other Python tool in a project — it will use the wrong interpreter and fail with import or module errors.
 
-```powershell
-& "C:\Users\johan\.agents\skills\verification\scripts\verify.ps1" pytest tests/path/to/test_file.py
-```
-
-```bash
-bash "$HOME/.agents/skills/verification/scripts/verify.sh" pytest tests/path/to/test_file.py
-```
-
-Run the wrapper from the target project root. The wrappers check that working directory for `venv` first, then `.venv`, prepend the environment to `PATH`, and pass all remaining arguments to the requested tool.
-
-Invoke pytest through the chosen interpreter:
-
-```powershell
-& ".\.venv\Scripts\python.exe" -m pytest tests/path/to/test_file.py
-```
-
-```powershell
-& ".\venv\Scripts\python.exe" -m pytest tests/path/to/test_file.py
-```
-
-If the repo documents a different runner, use that instead.
-
-## Wrapper Scripts
-
-Use [scripts/verify.ps1](scripts/verify.ps1) on PowerShell and [scripts/verify.sh](scripts/verify.sh) on bash.
-
-Run these from the target project root, not from the skill directory.
-
-Supported patterns:
-
-```powershell
-& "C:\Users\johan\.agents\skills\verification\scripts\verify.ps1" pytest tests/path
-& "C:\Users\johan\.agents\skills\verification\scripts\verify.ps1" ruff check .
-& "C:\Users\johan\.agents\skills\verification\scripts\verify.ps1" pyright .
-& "C:\Users\johan\.agents\skills\verification\scripts\verify.ps1" python -m pytest tests/path
-```
-
-```bash
-bash "$HOME/.agents/skills/verification/scripts/verify.sh" pytest tests/path
-bash "$HOME/.agents/skills/verification/scripts/verify.sh" ruff check .
-bash "$HOME/.agents/skills/verification/scripts/verify.sh" pyright .
-bash "$HOME/.agents/skills/verification/scripts/verify.sh" python -m pytest tests/path
-```
-
-The `pytest` and `ruff` shortcuts run through `python -m` so the selected virtual environment is used. Other tools run from the environment-adjusted `PATH`.
+If the repo documents a different runner (uv, poetry, pdm, tox, hatch, etc.), use that instead.
 
 ## Default Order
 
