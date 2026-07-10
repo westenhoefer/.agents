@@ -31,7 +31,7 @@ Prefer deliberate, durable structure over accidental reuse or local convenience.
 - Surface tradeoffs plainly. If multiple approaches are viable, compare them briefly and choose one.
 - Use diagrams for component placement and call flow when structure is easier to see than to describe.
 - Use code snippets for interfaces, contracts, and signatures when precision matters.
-- Separate locked decisions from open questions.
+- Separate locked decisions from open questions, and record a one-line rationale for each lock so a later spec or implementer knows what the constraint protects.
 - Hand off to `create-specification` only after the main ownership, boundary, and contract decisions are clear.
 
 ## Review Checklist

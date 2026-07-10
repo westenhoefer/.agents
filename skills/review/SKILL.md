@@ -15,7 +15,7 @@ Use a skeptical, bug-focused stance. Findings come first; summaries are secondar
 - over-defensive fallback logic
 - missing or weak tests
 - verification gaps
-- docs, README, skill, or rule follow-ups
+- capture follow-ups — defer to the `post-task-capture` skill
 - risky assumptions in repo-knowledge answers
 
 ## For Code Reviews

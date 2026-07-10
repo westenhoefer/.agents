@@ -7,7 +7,7 @@ description: Turns an approved direction into an implementation brief for a capa
 
 A specification should prevent architectural guessing, not remove all implementation judgment.
 
-Treat the implementing agent like a talented junior engineer: give it the system shape, ownership boundaries, contracts, invariants, pseudocode for tricky logic, and verification expectations. Let it choose routine edits that naturally follow from the codebase.
+Treat the implementing agent like a capable colleague: give it the system shape, ownership boundaries, contracts, invariants, the rationale behind locked decisions, and verification expectations. Let it choose routine edits that naturally follow from the codebase.
 
 ## When To Use
 
@@ -16,6 +16,8 @@ Treat the implementing agent like a talented junior engineer: give it the system
 - Clarifying boundaries, APIs, data flow, algorithms, risks, or verification before implementation.
 - Reviewing a plan that may let behavior land in the wrong layer.
 - Capturing concrete verification commands after the repo environment and project root are understood.
+
+
 
 ## Core Standard
 
@@ -48,12 +50,16 @@ Use these keywords deliberately for implementation requirements, constraints, an
 4. Locked Decisions
 5. Interfaces / Contracts
 6. Important Algorithms or Flows
-7. Relevant Skills
+7. Relevant Skills (optional)
 8. Implementation Notes
 9. Tests and Verification
 10. Risks and Open Questions
 
+
+
 ## Section Guidance
+
+
 
 ### Goal
 
@@ -80,6 +86,10 @@ Use diagrams when structure or flow is easier to see visually.
 
 Lock decisions that affect architecture, public behavior, compatibility, persistence, APIs, or verification.
 
+Record a one-line rationale for each lock. The intent behind a constraint tells the implementer what must survive a redesign; the bare rule does not.
+
+Instruct the implementer: when reality diverges from a locked decision mid-implementation, check in with the user with a concrete recommendation. Do not silently deviate, and do not push through a constraint whose intent no longer holds.
+
 Do not lock incidental implementation details unless choosing freely would produce materially different designs.
 
 ### Interfaces / Contracts
@@ -90,9 +100,9 @@ Prefer code blocks for contracts that must be exact.
 
 ### Important Algorithms or Flows
 
-Use pseudocode for non-trivial behavior.
+Use pseudocode only where a wrong-but-plausible implementation exists. Capable agents infer routine control flow reliably; pseudocode earns its place for genuinely subtle logic such as ordering constraints, concurrency, or non-obvious state transitions.
 
-Pseudocode should capture:
+When used, pseudocode should capture:
 
 - ordering
 - branching
@@ -105,25 +115,23 @@ Do not write pseudocode for straightforward plumbing.
 
 ### Relevant Skills
 
-Point out any skills the implementing agent should read and follow before starting work.
+Optional. If the implementing agent has the same skill auto-discovery, listing skills that would trigger from their own descriptions is ceremony — omit the section.
 
-Include a skill when it materially affects implementation style, verification, review, architecture, cleanup, SDK usage, settings, hooks, rules, or other task-specific workflow.
-
-Name the skill and explain why it applies in one short phrase. Do not list unrelated skills just because they are available.
+Include it only for skills that would not self-trigger: name the skill and explain why it applies in one short phrase.
 
 ### Implementation Notes
 
-Give targeted guidance, not a file-by-file script.
+This section owns negative space: what must not happen, and what the implementer will be tempted to do but should not. Anti-requirements pull more weight than instructions — current agents over-deliver more often than under-deliver.
 
-Mention specific files only when:
+Prefer notes like:
 
-- ownership must be fixed
-- a public contract lives there
-- a risky area needs attention
-- a tempting local workaround must be rejected
-- tests must cover a specific shared seam
+- "this seam must not learn about X"
+- "reject this tempting workaround, because ..."
+- ownership that must stay fixed
+- a risky area that needs attention
+- a specific shared seam tests must cover
 
-Avoid exhaustive "edit this file, then this file" instructions unless the user explicitly asks for a mechanical handoff.
+Avoid file lists and exhaustive "edit this file, then this file" instructions unless the user explicitly asks for a mechanical handoff.
 
 ### Tests and Verification
 
@@ -156,9 +164,11 @@ If a decision is unknown, ask rather than hiding uncertainty behind permissive w
 - "The implementer can decide" for architecture, ownership, public contracts, or algorithms.
 - "Prefer X, otherwise Y" when Y is only a shortcut around the right design.
 - Local wrappers that compensate for weak shared behavior without justifying why the shared seam should not change.
-- Vague phrases like "where appropriate", "as configured", "roughly", or "something like this" for important contracts.
+- Locked decisions recorded without their rationale.
 - Vague verification such as "run tests" when the repo-correct command, root, and environment can be determined.
 - Over-prescribing private helper names, internal ordering, or trivial refactors.
+
+
 
 ## Final Pass
 
@@ -171,7 +181,8 @@ Before handing off the spec, ask:
 5. Are we micromanaging anything the agent can infer safely?
 6. Are verification commands concrete and repo-correct?
 7. Are tests focused on behavior and risk?
-8. Are relevant skills named with clear instructions to follow them?
-9. Does requirement strength use RFC 2119 style language consistently?
+8. Does every locked decision carry its rationale?
+9. Do implementation notes name what must not happen, not just what should?
+10. Does requirement strength use RFC 2119 style language consistently?
 
 Tighten architecture, contracts, and algorithms. Remove unnecessary low-level instructions.

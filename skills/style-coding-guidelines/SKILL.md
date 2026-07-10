@@ -43,12 +43,4 @@ Tests should prove behavior, not incidental structure.
 - Cover obvious failure cases.
 - Avoid brittle tests that only assert config keys, object shapes, or private helpers without proving behavior.
 
-## Minor Change Fast Path
-
-For minor known changes:
-
-1. Confirm the intended change briefly.
-2. Avoid broad detours.
-3. Push back only for important correctness, data, security, architecture, or verification risks.
-4. Run focused verification.
-5. Report what changed, what was verified, and any limitation.
+For the minor-known-change workflow (confirm, scope tightly, verify, report), follow the `task-workflow-router` skill's minor-known-change mode.

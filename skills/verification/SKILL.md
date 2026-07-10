@@ -29,9 +29,7 @@ Before running or writing verification commands, identify:
 
 ## Python Guidance
 
-For any Python verification command, use the `python-environment` skill to run through the project's local virtual environment instead of the global interpreter. Never run a bare `python`, `pytest`, `ruff`, `pyright`, or other Python tool in a project — it will use the wrong interpreter and fail with import or module errors.
-
-If the repo documents a different runner (uv, poetry, pdm, tox, hatch, etc.), use that instead.
+Route every Python command through the `python-environment` skill; it owns the venv, wrapper, and runner rules.
 
 ## Default Order
 
