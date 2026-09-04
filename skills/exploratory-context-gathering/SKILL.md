@@ -1,6 +1,6 @@
 ---
 name: exploratory-context-gathering
-description: Gathers codebase context before architecture or planning work. Use for larger changes, ambiguous requests, architectural refactors, debugging with unclear ownership, or when relevant behavior is documented or implemented across multiple files.
+description: Use before architecture or planning for larger changes, ambiguous requests, architectural refactors, or behavior spread across multiple files.
 ---
 
 # Exploratory Context Gathering

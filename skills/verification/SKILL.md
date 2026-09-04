@@ -1,6 +1,6 @@
 ---
 name: verification
-description: Runs or specifies repo-correct verification commands for Python tests, pytest, lint, typecheck, focused checks, broader suites, and CI-like validation. Use when the user asks to run tests, pytest, verify this, focused verification, test failure, lint, typecheck, CI, or when hidden/gitignored .venv or venv discovery matters.
+description: Use when running or specifying tests, pytest, lint, typecheck, CI, or focused verification, or when venv discovery matters.
 ---
 
 # Verification

@@ -10,7 +10,7 @@ The skill setup is organized around a router plus reusable workflow phases:
 - `exploratory-context-gathering`: gathers codebase context before architecture or planning.
 - `architecture-design`: defines boundaries, ownership, tradeoffs, and locked architectural decisions.
 - `create-specification`: turns approved direction into an implementation brief with concrete verification commands.
-- `style-coding-guidelines`: guides one-job modules, one-altitude functions, shared-pattern evolution, error handling, typing, and tests.
+- `style-coding-guidelines`: guides one-job modules, one-altitude functions, side effects at entrypoints, shared-pattern evolution, error handling, typing, and tests.
 - `refactoring-cleanup`: applies preferred style and architecture patterns to drifted codebases.
 - `verification`: selects repo-correct test, lint, typecheck, and CI-like checks.
 - `review`: checks correctness, risks, tests, and readiness.

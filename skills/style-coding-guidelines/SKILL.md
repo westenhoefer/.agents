@@ -1,6 +1,6 @@
 ---
 name: style-coding-guidelines
-description: Guides implementation style for one-job modules, one-altitude functions, typed code, clean error handling, composition, and behavior-focused tests. Use when writing or modifying code, especially for minor known changes or execution after a spec.
+description: Use whenever writing, editing, implementing, or refactoring code.
 ---
 
 # Style Coding Guidelines
@@ -25,10 +25,20 @@ When adding behavior, decide in this order:
 2. **Named collaborator** if the caller would otherwise zoom in. The name must be a concept a reader would understand without seeing the caller, not `process_data` / `_helper`.
 3. **Own module** if that collaborator is a different job than the file's public surface — even the first time.
 
+- Do not extract a local helper whose name is more opaque than the code it wraps. `_exact` is worse than `os.environ.get`: the call site now requires a jump to learn what happened. Inline a thin wrap of a stdlib or API call. If extra behavior is real (strip, normalize, default), give it a name a reader understands without opening the function (`get_normalized_environment_variable`).
 - Do not flatten a long function into a pile of private helpers in the same file.
 - Do not split code into many tiny helpers that duplicate validation or error handling.
-- Use pure functions for deterministic transformations when they make code simpler and easier to test.
-- Do not force purity where it makes orchestration awkward.
+
+## Side Effects
+
+Keep impurity at the process edge. A side-effecting helper infects every caller and makes the chain hard to test.
+
+- The entrypoint owns process-level side effects: environment, filesystem, network, clocks, process-wide resources. Code below the entrypoint receives values; it does not re-read the world.
+- Do not bind runtime to source layout. Discovering a project root, config file, or resource by walking from the current file fails once the code is installed, bundled, or run from another working directory. Runtime config comes from the process (arguments, environment, injected values), not from the source tree.
+- Do not perform I/O or environment binding at import time. Import is not a controlled moment.
+- Prefer pure functions below the entrypoint. If a test would have to patch a module global or the process environment to change behavior, that value should have been an argument.
+- True invariants that never vary may stay module-level. Do not invent a container to inject every literal.
+- Do not force purity where the function's job is I/O. Keep that I/O next to the entrypoint.
 
 ## Implementation Style
 
@@ -64,6 +74,7 @@ Before finishing, inspect each touched file:
 - Did I add a second job? If yes, move it. If I only split the same job finer, put it back.
 - Does any function change altitude? If yes, the lower-altitude work is a collaborator, and if that is a different job, a different module.
 - Do private helpers out-volume the public surface? Those helpers are either glue that should go back inline, or they are the module.
+- Does a non-entrypoint module perform I/O, discover layout from its own path, or read policy from module globals? If yes, move the I/O to the edge and pass values in.
 
 Reject these shapes:
 
@@ -72,6 +83,10 @@ Reject these shapes:
 - A Protocol + strategies + factory that replaced a two-way branch.
 - One-function modules that are a finer grain of the same job (`load_x` / `validate_x` / `save_x`).
 - A function whose body is one catch-all `try` / `except` / `catch`.
+- A module-local `_exact` / `_helper` whose name hides a thin wrap the call site could have said plainly.
+- Library or settings code that loads process environment or discovers a project root from the source tree.
+- A deep function that re-reads the environment, filesystem layout, or module-level policy when its caller could have passed values.
+- I/O or environment binding at import time.
 
 ## Tests As Style
 

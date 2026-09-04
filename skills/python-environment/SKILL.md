@@ -1,6 +1,6 @@
 ---
 name: python-environment
-description: Runs Python commands through the project's local virtual environment instead of the global interpreter. Use BEFORE running any python, pytest, pip, ruff, pyright, mypy, python -m, or python-based CLI in a Python project, and whenever a command fails with ModuleNotFoundError, "No module named", "isn't on the global interpreter", "command not found" for a Python tool, or missing-dependency errors. Local .venv/ or venv/ is usually gitignored, so assume it exists even when file/glob listings do not show it.
+description: Use before running python, pytest, pip, ruff, pyright, mypy, or any Python CLI in a project, and when those commands fail with ModuleNotFoundError, missing-module, wrong-interpreter, or command-not-found errors.
 ---
 
 # Python Environment

@@ -1,6 +1,6 @@
 ---
 name: create-specification
-description: Turns an approved direction into an implementation brief for a capable coding agent, including concrete verification commands. Use after architecture decisions are clear, or when work needs precise boundaries, contracts, algorithms, risks, and repo-correct test, lint, typecheck, or CI commands.
+description: Use after architecture decisions are clear, or when work needs an implementation brief with boundaries, contracts, algorithms, risks, or verification commands.
 ---
 
 # Create Specification

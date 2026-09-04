@@ -1,6 +1,6 @@
 ---
 name: architecture-design
-description: Designs or reviews software architecture with explicit boundaries, tradeoffs, and pushback when a proposal weakens structure. Use when planning a new slice, defining module boundaries, evaluating patterns, or reviewing architectural plans and refactors.
+description: Use when planning a new slice, defining module boundaries, evaluating patterns, or reviewing architectural plans and refactors.
 ---
 
 # Architecture Design

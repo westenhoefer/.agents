@@ -1,6 +1,6 @@
 ---
 name: review
-description: Reviews implemented changes, plans, or repo-knowledge findings for correctness, risks, tests, and readiness. Use after execution, verification, repo lookups, PR work, or when the user asks for review, code review, readiness, risks, or missed issues.
+description: Use after execution, verification, repo lookups, or PR work, or when the user asks for review, readiness, risks, or missed issues.
 ---
 
 # Review
@@ -19,6 +19,8 @@ Use a skeptical, bug-focused stance. Findings come first; summaries are secondar
 - risky assumptions in repo-knowledge answers
 
 ## For Code Reviews
+
+Check code shape against the `style-coding-guidelines` skill.
 
 Report findings first, ordered by severity. Ground each finding in concrete code or behavior.
 

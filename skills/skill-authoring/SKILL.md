@@ -1,6 +1,6 @@
 ---
 name: skill-authoring
-description: Applies the personal skill library's editorial principles when creating or revising skills in ~/.agents/skills. Use when editing a SKILL.md in this library, reviewing skill quality, or deciding whether guidance belongs in a skill body, a description, a script, or a reference file.
+description: Use when creating or editing a SKILL.md in this library, reviewing skill quality, or deciding where guidance belongs.
 ---
 
 # Skill Authoring
@@ -17,7 +17,7 @@ Editorial principles for this skill library, calibrated for current-generation m
 
 ## Revision Checklist
 
-- Description states WHAT the skill does and WHEN to trigger it, in third person, with concrete trigger terms.
+- Description states WHEN to read the skill, in third person, with concrete trigger terms. Do not summarize the body.
 - Body matches the description after edits.
 - Cross-references name the skill (e.g. "the `verification` skill"), not relative paths.
 - Strict rules carry their rationale.

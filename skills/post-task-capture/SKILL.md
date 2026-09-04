@@ -1,6 +1,6 @@
 ---
 name: post-task-capture
-description: Performs a brief cleanup check after substantive tasks for README/docs updates, tests, skills, repo-local rules, environment workflows, and reusable operational lessons. Use near task closeout after implementation, verification, review, refactoring, or whenever the agent had to rediscover setup, virtualenv, temp-path, command, CI, or repo-specific workflow details.
+description: Use near task closeout after implementation, verification, review, or refactoring, or when setup, venv, temp-path, command, or CI details had to be rediscovered.
 ---
 
 # Post Task Capture

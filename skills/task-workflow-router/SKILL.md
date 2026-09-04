@@ -1,6 +1,6 @@
 ---
 name: task-workflow-router
-description: Classifies coding-agent requests into repo-knowledge lookup, minor known change, larger exploratory change, or miscellaneous work, then selects the right workflow phases. Use at the start of software tasks when deciding whether to answer from repo docs, execute narrowly, explore and plan, or ask for clarification.
+description: Use at the start of a software task when deciding whether to answer from repo docs, execute narrowly, explore and plan, or ask for clarification.
 ---
 
 # Task Workflow Router

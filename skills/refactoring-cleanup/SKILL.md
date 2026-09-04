@@ -1,6 +1,6 @@
 ---
 name: refactoring-cleanup
-description: Cleans up codebases that drift from preferred style, testing, and architecture patterns. Use for refactoring tests, reducing fallback-heavy code, improving type hints, removing duplicated error handling, or planning architectural cleanup with simple or exploratory modes.
+description: Use when refactoring tests, mixed-job files, helper graveyards, fallback-heavy or catch-all error handling, impurity below the entrypoint, or planning architectural cleanup.
 ---
 
 # Refactoring Cleanup
@@ -15,10 +15,10 @@ Use for known, localized improvements:
 
 - cleaning brittle or low-value tests
 - improving type hints and data contracts
-- reducing fallback-heavy code
-- removing duplicated validation or error handling
-- replacing awkward helpers with clearer control flow
-- applying composition, DI, or pure functions where the improvement is obvious
+- reducing fallback-heavy or catch-all error handling
+- replacing awkward or opaque helpers with clearer control flow
+- splitting mixed-job files or helper graveyards
+- moving I/O and environment binding to the entrypoint
 
 Keep scope tight. Name the behavior that must remain unchanged and run focused verification.
 
