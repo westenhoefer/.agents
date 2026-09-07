@@ -1,50 +1,26 @@
 ---
 name: verification
-description: Use when running or specifying tests, pytest, lint, typecheck, CI, or focused verification, or when venv discovery matters.
+description: Use when choosing, specifying, or running focused tests, lint, formatting checks, static analysis, typechecks, or CI-like verification.
 ---
 
 # Verification
 
 Use the project's native verification commands with the correct root, environment, and scope.
 
-## Core Rules
+## Choose the Check
 
-- Prefer documented project commands when they exist.
-- Run commands from the directory that makes imports, config, and scripts resolve correctly.
-- Use the closest project virtual environment, tool runner, or documented interpreter.
-- Treat local virtual environments such as `.venv` or `venv` as likely present even when file/glob checks do not list them; they are normally gitignored.
-- Start with the smallest check that gives meaningful confidence.
-- Expand to broader suites only when requested, risk requires it, or focused results are inconclusive.
-- Do not run package installation commands as part of verification.
+- Find documented commands in repo instructions, README files, package scripts, build files, and CI configuration. Prefer these over guessed invocations.
+- Identify the working directory, runner, and focused target that proves the changed behavior. If sources conflict, report the conflict rather than silently combining them.
+- Route Python command selection and execution through `python-environment`; it owns interpreter discovery and local-tool isolation.
+- Do not install packages as part of verification. Report missing prerequisites rather than silently changing the environment.
+- Start with the smallest meaningful check. Expand when cross-cutting risk requires it, focused results are inconclusive, or the user requests broader coverage.
 
-## Choosing Commands
+## Execution
 
-Before running or writing verification commands, identify:
+Typically run non-mutating lint/format checks, static analysis, and then focused tests. Use the order that gives useful feedback fastest for this project; do not run irrelevant stages merely to satisfy a sequence.
 
-- project root for the changed code
-- documented test, lint, typecheck, or CI command
-- interpreter, virtual environment, package runner, or script entrypoint
-- focused target that proves the changed behavior
-- broader command needed for cross-cutting changes
-
-## Python Guidance
-
-Route every Python command through the `python-environment` skill; it owns the venv, wrapper, and runner rules.
-
-## Default Order
-
-1. Fast lint or formatting checks that do not modify files unless fixing is explicitly in scope.
-2. Static analysis or type checking.
-3. Focused tests for the changed area.
-4. Broader suites when needed.
+Formatting fixes and auto-fix modes must be in scope. A check that modifies files is not read-only verification.
 
 ## Reporting
 
-When reporting verification, say:
-
-- command actually run or specified
-- working directory
-- whether scope was focused or broad
-- what behavior the check proves
-- what was not run
-- failures, skips, or scope limitations
+State the actual command, working directory, scope, and result. Explain what it proves when that is not obvious. Distinguish commands run from commands merely recommended, and call out failures, skips, unrun broader checks, and remaining limitations.

@@ -13,8 +13,8 @@ Examples:
   run-in-venv.sh pyright .
   run-in-venv.sh python -m pytest tests/test_example.py
 
-The script selects venv/ or .venv/, prepends its bin directory to PATH,
-and forwards all arguments to the requested tool.
+The script selects venv/ or .venv/ and executes its interpreter or local tool.
+Missing tools fail rather than falling back to a global executable.
 EOF
 }
 
@@ -36,19 +36,35 @@ else
   exit 1
 fi
 
-export PATH="$PWD/$venv_bin:$PATH"
+venv_bin="$PWD/$venv_bin"
+export PATH="$venv_bin:$PATH"
+python="$venv_bin/python"
+if [[ -f "$venv_bin/python.exe" ]]; then
+  python="$venv_bin/python.exe"
+fi
 
 tool="$1"
 shift
 
 case "$tool" in
   python)
-    exec python "$@"
+    exec "$python" "$@"
     ;;
   pytest|ruff)
-    exec python -m "$tool" "$@"
-    ;;
-  *)
-    exec "$tool" "$@"
+    exec "$python" -m "$tool" "$@"
     ;;
 esac
+
+# An explicit local path prevents PATH from selecting a global fallback.
+if [[ -z "$tool" || "$tool" == */* || "$tool" == *\\* || "$tool" == "." || "$tool" == ".." ]]; then
+  echo "Expected a tool name, not a path." >&2
+  exit 2
+fi
+for suffix in "" .exe .cmd .bat; do
+  executable="$venv_bin/$tool$suffix"
+  if [[ -f "$executable" && -x "$executable" ]]; then
+    exec "$executable" "$@"
+  fi
+done
+echo "Tool '$tool' is not installed in $venv_bin; global fallback is disabled." >&2
+exit 127

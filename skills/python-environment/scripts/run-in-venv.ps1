@@ -15,8 +15,8 @@ Examples:
   .\run-in-venv.ps1 pyright .
   .\run-in-venv.ps1 python -m pytest tests/test_example.py
 
-The script selects venv/ or .venv/, prepends its Scripts/bin directory to PATH,
-and forwards all arguments to the requested tool.
+The script selects venv/ or .venv/ and executes its interpreter or local tool.
+Missing tools fail rather than falling back to a global executable.
 "@
 }
 
@@ -34,7 +34,7 @@ $candidates = @(
 
 $selected = $null
 foreach ($candidate in $candidates) {
-    if (Test-Path $candidate.Python) {
+    if (Test-Path -LiteralPath $candidate.Python -PathType Leaf) {
         $selected = $candidate
         break
     }
@@ -45,7 +45,9 @@ if (-not $selected) {
     exit 1
 }
 
-$env:PATH = "$(Resolve-Path $selected.Bin);$env:PATH"
+$venvBin = (Resolve-Path -LiteralPath $selected.Bin).Path
+$python = (Resolve-Path -LiteralPath $selected.Python).Path
+$env:PATH = "$venvBin;$env:PATH"
 
 $tool = $ToolArgs[0]
 $remainingArgs = @()
@@ -55,19 +57,34 @@ if ($ToolArgs.Count -gt 1) {
 
 switch ($tool) {
     "python" {
-        & python @remainingArgs
+        & $python @remainingArgs
         exit $LASTEXITCODE
     }
     "pytest" {
-        & python -m pytest @remainingArgs
+        & $python -m pytest @remainingArgs
         exit $LASTEXITCODE
     }
     "ruff" {
-        & python -m ruff @remainingArgs
+        & $python -m ruff @remainingArgs
         exit $LASTEXITCODE
     }
     default {
-        & $tool @remainingArgs
-        exit $LASTEXITCODE
+        if ([string]::IsNullOrEmpty($tool) -or $tool.Contains('/') -or $tool.Contains('\') -or $tool -eq '.' -or $tool -eq '..') {
+            Write-Error 'Expected a tool name, not a path.'
+            exit 2
+        }
+        foreach ($suffix in @('', '.exe', '.cmd', '.bat', '.ps1')) {
+            $executable = Join-Path $venvBin "$tool$suffix"
+            if (Test-Path -LiteralPath $executable -PathType Leaf) {
+                $LASTEXITCODE = 0
+                & $executable @remainingArgs
+                $succeeded = $?
+                if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+                if (-not $succeeded) { exit 1 }
+                exit 0
+            }
+        }
+        Write-Error "Tool '$tool' is not installed in $venvBin; global fallback is disabled."
+        exit 127
     }
 }
