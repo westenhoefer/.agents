@@ -5,7 +5,7 @@ description: Use when explaining how code works, tracing a request or data flow,
 
 # Diagrams
 
-The user understands and reviews systems through diagrams, not code. Draw one whenever an answer involves more than two components, an ordering, or a lifecycle; do not wait to be asked. A wrong diagram is worse than none, so draw from code you have read, never from names, comments, or memory.
+The user prefers to see structure and flow as diagrams. Draw one whenever an answer involves more than two components, an ordering, or a lifecycle; do not wait to be asked. A wrong diagram is worse than none, so draw from code you have read, never from names, comments, or memory.
 
 ## Pick the Diagram by the Question
 
@@ -20,7 +20,7 @@ A question that needs two kinds gets two diagrams.
 - Explaining existing behavior: a `current` diagram of the path in question.
 - Designing a change: the `current` path first, then a `proposed` or `mixed` diagram in which the change is visible. Agree the design on the diagram before writing a spec.
 - Debugging across components: the failing path, with the point where observed and expected behavior diverge marked.
-- After implementation: an as-built diagram of the changed paths, shown next to the agreed design. Whoever draws it must not have seen the proposed diagram; otherwise it shows the design, not the code.
+- After implementation: an as-built diagram of the changed paths, shown next to the agreed design. Whoever draws it must not have seen the proposed diagram; otherwise it shows the design, not the code. A match shows the structure is right, not that the code is correct or clean.
 
 Skip the diagram when it would have three nodes or fewer, would restate one function line by line, or the question is a lookup.
 
