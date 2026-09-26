@@ -22,10 +22,10 @@ Prefer deliberate, durable structure over accidental reuse. Explore enough to es
 - Push back on mixed responsibilities, policy hidden in the wrong layer, and local wrappers that only compensate for a weak shared default.
 - If several approaches are viable, briefly compare them, recommend one, and name its main tradeoff. Do not create abstractions merely to keep every option open.
 - Lock decisions affecting ownership, contracts, persistence, compatibility, or public behavior. Record a one-line rationale so an implementer knows what each constraint protects.
-- Use diagrams when placement or flow is clearer visually, and concrete signatures when a boundary needs precision. Neither is mandatory ceremony.
+- Work the design out on diagrams with the `diagrams` skill: the current path first, then the proposed change. Add concrete signatures only where a boundary needs precision.
 
 ## Handoff
 
-Report the recommended shape, supporting evidence, tradeoffs, locked decisions, and unresolved questions. For a refactor, explicitly identify the behavior and interfaces that must remain unchanged.
+Present the recommended design as diagrams, with its tradeoffs, decisions, and unresolved questions. For a refactor, name the behavior and interfaces that must remain unchanged.
 
-Use `create-specification` when an implementation brief is needed, after the main direction is agreed. Do not write a spec with architectural questions hidden behind permissive wording.
+Once the user agrees, freeze the design with `create-specification` if an implementer needs a brief. Do not write a spec with architectural questions hidden behind permissive wording.

@@ -1,66 +1,50 @@
 ---
 name: create-specification
-description: Use after architectural direction is agreed, when preparing or reviewing an implementation brief with ownership, contracts, constraints, risks, and verification expectations.
+description: Use after a design is agreed, when freezing it into an implementation brief for an implementer, or when reviewing such a brief.
 ---
 
 # Create Specification
 
-A specification prevents architectural guessing, not all implementation judgment. Treat the implementer as a capable colleague: define the boundaries, contracts, invariants, rationale, and proof of completion; leave routine edits to them.
+A spec freezes an agreed design so a fresh implementer can build it and the user can approve it quickly. The user has already agreed to the design in discussion, usually on diagrams; the spec must not retell it. It carries those diagrams plus only what they cannot show. If reading the spec would take longer than reviewing the resulting diff, it is too long.
 
-## Structure
+## Format
 
-Always state the goal, scope, relevant constraints, and verification expectations. Include the sections below where they carry real information. Combine related sections and omit irrelevant ones rather than filling eleven headings with boilerplate.
+````markdown
+# <change>
 
-### Goal and Scope
+<Goal in two or three sentences. Non-goals only where they are tempting.>
 
-State the user-visible or system-level outcome. Distinguish in-scope work from explicit non-goals.
+## Design
+<The agreed Mermaid diagrams, verbatim, with changed elements marked. One-line caption each.>
 
-### Architecture
+## Decisions
+- <decision>: <why>. Tag any decision the user has not explicitly agreed to as (new).
 
-Name the owning modules or layers, what crosses each boundary, and what must stay separate. Identify patterns to preserve or improve. Use `architecture-design` if those choices are still unresolved; do not hide architectural uncertainty in an implementation brief.
+## Must not
+- <tempting wrong approach, or a concern leaking across a boundary>: <why>.
 
-### Locked Decisions
+## Contracts
+<Exact signatures, schemas, routes, or config keys, only where two plausible choices would be incompatible.>
 
-Lock consequential ownership, behavior, compatibility, persistence, API, and verification decisions—not incidental implementation details. Give each lock a one-line rationale.
+## Done when
+- <behavior>: `<command>` in `<working directory>`.
 
-Require the implementer to check in with a concrete recommendation if reality diverges from a locked decision. They must neither silently deviate nor blindly preserve a constraint whose intent no longer holds.
+## Open
+<Unresolved questions. Empty at handoff.>
+````
 
-### Interfaces and Contracts
+Omit any section with nothing to say.
 
-Provide exact signatures, data shapes, schemas, events, routes, commands, or configuration keys where multiple plausible choices would be incompatible. Do not prescribe private helper names.
+## Rules
 
-### Important Algorithms or Flows
-
-Use pseudocode only where a wrong-but-plausible implementation exists: ordering, concurrency, idempotency, subtle state transitions, or non-obvious failure handling. Routine plumbing does not need pseudocode.
-
-### Implementation Constraints
-
-Describe the negative space: responsibilities that must not leak across a seam, tempting workarounds to reject, compatibility to preserve, and shared behavior tests must exercise. Explain why a strict constraint matters.
-
-Avoid file-by-file edit scripts, exhaustive task lists that repeat the spec, or local wrappers compensating for weak shared defaults without a justification.
-
-### Tests and Verification
-
-Specify behavior to prove: successful operation, failure cases, regression coverage, and integration checks where behavior crosses boundaries.
-
-Use `verification` to select concrete commands and `python-environment` for Python. Include the working directory, runner/interpreter, focused target, and what each check proves. Resolve prerequisites before claiming a command is implementation-ready; do not substitute a vague "run tests".
-
-### Risks and Open Questions
-
-Surface unresolved product, migration, compatibility, or data questions. Ask about decisions that would materially change implementation rather than writing "the implementer can decide".
-
-### Delivery / Handoff
-
-State the requested completion artifact: local changes with a verification report, a commit, or a PR. Do not infer authorization to commit, push, create PRs, or trigger external services from an implementation request.
-
-If branch-based delivery is requested, record the actual agreed base branch at spec creation so a later session does not guess. Name a harness-specific handoff skill only when that harness provides it and the user requested that workflow. Shared specs must not require unavailable tools or Cursor-only reviewer agents.
-
-## Requirement Strength
-
-Use RFC 2119 keywords deliberately: `MUST` / `MUST NOT` for obligations, `SHOULD` / `SHOULD NOT` for recommendations, and `MAY` for options. Do not weaken a required boundary with "prefer X, otherwise Y" when Y is merely a shortcut.
+- Embed the diagram source in the file. Canvas diagrams do not survive reload, and a fresh implementer cannot see them.
+- Say each thing once. A boundary drawn in Design does not reappear under Decisions unless the decision is why it sits there.
+- Give every decision its reason, so an implementer who hits divergent reality can tell whether it still holds. State in the spec that they must then stop with a recommendation, neither silently deviating nor blindly complying.
+- Use pseudocode only where a wrong-but-plausible implementation exists: ordering, concurrency, idempotency, subtle state transitions. A state diagram often says it better.
+- Choose Done-when commands with `verification`; they must run as written.
+- Do not prescribe private helper names, file-by-file edit scripts, routine edits a capable implementer infers, or skills the implementer discovers anyway.
+- Write plain sentences, not RFC 2119 keywords; Must not carries the hard constraints.
 
 ## Final Pass
 
-Could two capable implementers produce materially different architectures from this brief? Tighten those choices and public contracts. Check that locks have rationale, tricky flows are precise, verification is repo-correct, and delivery is explicitly authorized. Remove details a capable implementer can infer safely.
-
-Do not enumerate automatically discovered skills unless a relevant skill would not self-trigger or the implementer lacks the same discovery mechanism.
+Could two capable implementers build materially different architectures from this? Tighten those choices. Then delete everything a capable implementer would infer, and check that every (new) tag is still accurate.
