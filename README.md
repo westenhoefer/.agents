@@ -6,7 +6,7 @@ Shared, harness-neutral coding skills live in `skills/`. Cursor-specific PR hand
 
 - `architecture-design`: evidence gathering, ownership, boundaries, tradeoffs, and locked architectural decisions.
 - `create-specification`: implementation briefs with precise constraints and repo-correct verification; section detail scales with the task.
-- `style-coding-guidelines`: code shape, explicit side-effect boundaries, tests, and behavior-preserving refactoring.
+- `style-coding-guidelines`: proportion, code shape, explicit side-effect boundaries, tests, and behavior-preserving refactoring.
 - `python-environment`: project-local interpreter and tool selection, with shell-specific wrappers.
 - `verification`: focused checks and honest reporting of results and gaps.
 - `review`: concrete findings, readiness assessment, and capture of newly discovered operational knowledge.
