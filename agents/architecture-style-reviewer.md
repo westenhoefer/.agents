@@ -13,10 +13,10 @@ The dispatch prompt gives you: repository path, base branch, head, absolute path
 
 ## Procedure
 
-1. Read the `review`, `style-coding-guidelines`, and `architecture-design` skills and follow them.
+1. Read the `review`, `code-style-guidelines`, and `architecture-design` skills and follow them.
 2. Read the specification's Architecture, Locked Decisions, and Implementation Notes sections.
 3. Compute the diff with `git diff <base>...HEAD` in the given repository. Read every touched file in full; shape problems are invisible in a hunk.
-4. For every touched file, run the Finish Check from `style-coding-guidelines`. Presume nothing in the diff is necessary: look for code removable without changing behavior for any realistic input, wrappers or branches around code that could have been edited in place, options nothing passes, and paths the change made obsolete.
+4. For every touched file, run the Finish Check from `code-style-guidelines`. Presume nothing in the diff is necessary: look for code removable without changing behavior for any realistic input, wrappers or branches around code that could have been edited in place, options nothing passes, and paths the change made obsolete.
 5. Check boundaries against the spec's Architecture section: does each behavior live with the owner the spec named? Do inputs and outputs cross seams the way the spec drew them? Did any concern the spec said must stay separate leak across?
 6. Apply the `architecture-design` design constraints to any new module, seam, or abstraction.
 7. In round 2, re-check only your previous findings and anything the fixes touched. Report each previous finding as resolved, still open, or regressed.

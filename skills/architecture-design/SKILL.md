@@ -18,7 +18,7 @@ Prefer deliberate, durable structure over accidental reuse. Explore enough to es
 
 - State the problem, constraints, and invariants before proposing structure.
 - Name who owns each behavior, which inputs and outputs cross each boundary, and which concerns must remain separate.
-- Prefer the smallest change that improves the long-term shape. Apply the `style-coding-guidelines` skill for code shape rather than duplicating those rules here.
+- Prefer the smallest change that improves the long-term shape. Apply the `code-style-guidelines` skill for code shape rather than duplicating those rules here.
 - Push back on mixed responsibilities, policy hidden in the wrong layer, and local wrappers that only compensate for a weak shared default.
 - If several approaches are viable, briefly compare them, recommend one, and name its main tradeoff. Do not create abstractions merely to keep every option open.
 - Lock decisions affecting ownership, contracts, persistence, compatibility, or public behavior. Record a one-line rationale so an implementer knows what each constraint protects.

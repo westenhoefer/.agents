@@ -11,7 +11,7 @@ Use a skeptical, bug-focused stance. Findings come first; summaries are secondar
 
 - Check correctness, edge cases, regressions, ownership mistakes, hidden fallback behavior, weak tests, and verification gaps.
 - Trace representative user actions across transport, validation, state updates, and visible UI. Do not equate HTTP success or passing mocked-layer tests with feature success. Check that rejected responses produce an accurate, visible outcome, and that navigation or component disposal cannot silently lose valid work.
-- Apply `style-coding-guidelines` when reviewing code shape. Ground every finding in a concrete location and consequence, not a hypothetical preference.
+- Apply `code-style-guidelines` when reviewing code shape. Ground every finding in a concrete location and consequence, not a hypothetical preference.
 - For factual or repo-knowledge claims, use the relevant docs, scripts, or observed output. State conflicts and distinguish verified facts from inference.
 - Report findings in severity order:
   - `blocking`: correctness, spec violation, security, data loss, or broken contract; must be fixed before shipping.

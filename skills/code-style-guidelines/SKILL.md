@@ -1,5 +1,5 @@
 ---
-name: style-coding-guidelines
+name: code-style-guidelines
 description: Use whenever writing, editing, implementing, or refactoring code, including test cleanup and behavior-preserving structural changes.
 ---
 
