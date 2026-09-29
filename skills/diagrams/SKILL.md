@@ -28,6 +28,7 @@ Skip the diagram when it would have three nodes or fewer, would restate one func
 
 - One question per diagram, titled with the question it answers. Several small diagrams beat one map of the system.
 - Name nodes and participants as the code names them, so each maps back to a file or symbol. "Processing layer" maps to nothing.
+- Label edges in flowchart-style diagrams with the action, data, or relationship they represent (e.g. `A -->|sends request| B`); unlabeled arrows make the flow hard to follow.
 - Back every node and edge that claims behavior with a reference. Draw inferred flowchart edges dashed (`-.->`); in sequence diagrams, where dashes mean replies, mark inferred messages in the label.
 - Mark changed elements in `mixed` diagrams in their labels (`new`, `changed`, `removed`); the canvas rejects `classDef` and `style`.
 - Include the failure, cancellation, or retry path when it is part of the question. A happy-path diagram of a failure-prone flow misleads.
