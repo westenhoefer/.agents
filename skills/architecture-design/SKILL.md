@@ -5,7 +5,7 @@ description: Use when exploring a larger or ambiguous change, defining ownership
 
 # Architecture Design
 
-Prefer deliberate, durable structure over accidental reuse. Explore enough to establish the constraints before choosing a design; do not make a planning exercise out of a small, known edit.
+Prefer deliberate, durable structure over accidental reuse. Explore enough to establish the constraints before choosing a design.
 
 ## Evidence Before Structure
 
@@ -28,4 +28,4 @@ Prefer deliberate, durable structure over accidental reuse. Explore enough to es
 
 Present the recommended design as diagrams, with its tradeoffs, decisions, and unresolved questions. For a refactor, name the behavior and interfaces that must remain unchanged.
 
-Once the user agrees, freeze the design with `create-specification` if an implementer needs a brief. Do not write a spec with architectural questions hidden behind permissive wording.
+Once the user agrees, freeze the design with `create-specification` if a fresh implementer will build it. Do not write a spec with architectural questions hidden behind permissive wording.

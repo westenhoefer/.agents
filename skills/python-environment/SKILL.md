@@ -13,7 +13,7 @@ Select the project's environment explicitly. A bare interpreter or CLI can silen
 - Inspect the target project directory for `venv/` and `.venv/`; ignored environments are absent from many code-search listings. Do not assume absence, and do not assume an environment exists without checking.
 - Run from the root needed by the target code's imports and tool configuration, which may be below the Git repository root.
 - Use the same environment for version checks, one-off scripts, test collection, and actual tests. A failed bare invocation is not a reason to install global packages.
-- If no suitable environment or runner is available, report the missing prerequisite and ask. Do not silently create an environment or install dependencies during discovery or verification.
+- If no suitable environment or runner is available, report the missing prerequisite and ask.
 
 ## Wrappers
 
@@ -48,4 +48,4 @@ The wrappers prefer native shell layouts (`bin` for Bash, `Scripts` for PowerShe
 ./.venv/Scripts/python.exe -m pytest tests/path
 ```
 
-Match syntax to the active shell. When a bare command fails with a missing-module or command-not-found error, correct the environment rather than retrying the same bare command. Keep package installation a separate, explicitly authorized action.
+Match syntax to the active shell. When a bare command fails with a missing-module or command-not-found error, correct the environment rather than retrying the same bare command.

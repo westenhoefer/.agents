@@ -18,7 +18,7 @@ Generated code fails in a predictable direction: it solves the problems it can i
 
 ## Scope and Refactoring
 
-- Keep small, known changes small. Do not add planning ceremony or unrelated cleanup to a narrow request.
+- Keep small, known changes small. Do not add unrelated cleanup to a narrow request.
 - Refactoring preserves public behavior, persisted data, and stable interfaces unless redesign is explicitly in scope. Identify that invariant and use `verification` to prove it.
 - If cleanup exposes an unresolved ownership, compatibility, or migration decision, use `architecture-design` before broadening the work.
 - Do not drive-by improve a shared reader, service, helper, or base class. Upstream a change only when this work would otherwise wrap a bad default, or the user requested the refactor.

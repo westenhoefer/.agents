@@ -5,7 +5,7 @@ description: Use for explicit code or skill reviews, readiness and risk assessme
 
 # Review
 
-Use a skeptical, bug-focused stance. Findings come first; summaries are secondary. A routine lookup or trivial edit does not need a formal review report.
+Use a skeptical, bug-focused stance. Findings come first; summaries are secondary.
 
 ## Review Standard
 
@@ -32,4 +32,4 @@ Environment discoveries are especially worth capturing: the exact working direct
 
 ## Output
 
-For a review request: findings, material assumptions/questions, brief summary if useful, and verification gaps. For implementation closeout: when the change had an agreed design, lead with the as-built diagram beside it (see `diagrams`) and explain each divergence; then report behavior risks, checks run, and any capture recommendation worth acting on. Fix style findings rather than reporting them. Skip empty ceremony.
+For a review request: findings, material assumptions/questions, brief summary if useful, and verification gaps. For implementation closeout: when the workflow calls for an as-built comparison, lead with it (see `diagrams`) and explain each divergence; then report behavior risks, checks run, and any capture recommendation worth acting on. Fix style findings rather than reporting them. Skip empty ceremony.

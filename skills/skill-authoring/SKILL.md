@@ -9,7 +9,7 @@ Editorial principles for this skill library, calibrated for current-generation m
 
 ## Principles
 
-1. **Anti-goals over prescriptions.** Current models over-deliver, not under-deliver. Guidance about what must *not* happen ("reject this tempting workaround", "this seam must not learn about X") pulls more weight than step-by-step instructions. Trim prescriptive steps a capable model infers; keep and sharpen guardrails.
+1. **Guard shortcuts and ceremony; do not script procedures.** Current models over-deliver, not under-deliver, and designs are agreed on diagrams rather than in prose. Spend must-nots on tempting shortcuts (a mock-call test, a silent fallback, a global install) and on redundant ceremony (a step, section, or check whose risk is absent). Trim procedures a capable model infers.
 2. **Rationale on constraints.** When a skill locks a decision or imposes a strict rule, record *why* in one phrase. An agent hitting divergent reality mid-task should use the rationale to form a recommendation and check in with the user — not silently deviate, and not blindly comply when the constraint's intent no longer holds.
 3. **Trust-calibrated specificity.** Low-freedom detail (exact commands, scripts, pseudocode) only where a wrong-but-plausible path exists — venv routing, verification commands, genuinely subtle algorithms. High freedom everywhere else.
 4. **Cut ceremony.** Remove sections that duplicate what skill auto-discovery or the system prompt already provides.

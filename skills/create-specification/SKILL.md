@@ -1,6 +1,6 @@
 ---
 name: create-specification
-description: Use after a design is agreed, when freezing it into an implementation brief for an implementer, or when reviewing such a brief.
+description: Use after a design is agreed, when a fresh implementer (a worker, a new session, or another tool) will build it, or when reviewing such a brief.
 ---
 
 # Create Specification
