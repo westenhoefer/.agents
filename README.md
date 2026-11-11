@@ -1,49 +1,24 @@
 # .agents
 
-Shared, harness-neutral coding skills live in `skills/`. Cursor-specific PR handoff lives in `~/.cursor/skills/implementation-handoff/`; it is deliberately not discoverable by pi as a shared skill.
+Shared, harness-neutral coding skills live in `skills/`. The Cursor-specific UI/UX developer agent lives in `~/.cursor/agents/ui-ux-developer.md`; it is not part of this shared library.
 
 ## Shared Skills
 
-- `architecture-design`: evidence gathering, ownership, boundaries, tradeoffs, and locked architectural decisions.
-- `create-specification`: frozen implementation briefs built from the agreed diagrams plus decisions, constraints, and repo-correct verification.
-- `diagrams`: automatic use of sequence, flowchart, and state diagrams for explaining, designing, debugging, and reviewing.
-- `code-style-guidelines`: proportion, code shape, explicit side-effect boundaries, tests, and behavior-preserving refactoring.
-- `python-environment`: project-local interpreter and tool selection, with shell-specific wrappers.
-- `verification`: focused checks and honest reporting of results and gaps.
-- `review`: concrete findings, readiness assessment, and capture of newly discovered operational knowledge.
+Three core entry points contain useful principles and select on-demand references:
+
+- [development-workflow](skills/development-workflow/SKILL.md): advancing and coordinating work; references cover design, investigations, handoffs, review and PR slices.
+- [engineering-practices](skills/engineering-practices/SKILL.md): judging and producing artifacts; references cover code style, testing, documentation, refactoring and verification.
+- [agent-tools](skills/agent-tools/SKILL.md): operational guidance for browser access, diagrams, Switchboard, Pi subagents and worktrees. Pi-specific wiring is identified in its references.
+
+Read the matching entry point, then only the references relevant to the task. Reference files are not separate discoverable skills. This is guidance ownership, not a required workflow sequence: small settled changes stay small, while uncertainty and risk determine collaboration, design, delegation and review.
+
+Specialists retain their own contracts:
+
+- `python-environment`: project-local interpreter and tool selection, with shell-specific wrappers below.
+- `hf-cli`: Hugging Face Hub and related model/dataset operations.
 - `skill-authoring`: editorial standards for this library.
 
-Small known changes should remain small. Architectural work needs evidence and agreed boundaries before implementation, but not every task needs a spec. Repo-knowledge answers should come from the relevant docs or scripts, with exact working-directory and environment requirements.
-
-The former router, exploration, refactoring, and post-task-capture skills were consolidated into the owning skills above. There is no mandatory cross-harness PR automation.
-
-## Cursor Subagents
-
-Custom subagent definitions remain in `agents/` and are exposed to Cursor through a link at `~/.cursor/agents`:
-
-- `spec-conformance-reviewer`: read-only implementation review against a specification.
-- `architecture-style-reviewer`: read-only ownership and code-shape review.
-- `ui-ux-developer`: visual/interaction design and frontend implementation.
-
-Cursor's `implementation-handoff` dispatches the reviewers when an explicitly requested PR workflow is available, adding the built-in security reviewer when appropriate. These definitions are not automatically pi subagents.
-
-### Link Setup
-
-Only create the link if `~/.cursor/agents` does not exist. If it already exists, inspect it and preserve its contents rather than deleting it blindly.
-
-PowerShell (junction; normally no elevation needed):
-
-```powershell
-New-Item -ItemType Junction -Path "$HOME\.cursor\agents" -Target "$HOME\.agents\agents"
-```
-
-macOS / Linux:
-
-```sh
-ln -s "$HOME/.agents/agents" "$HOME/.cursor/agents"
-```
-
-Reload Cursor after adding or renaming agent definitions. Keep these files in this repository rather than accidentally duplicating the junction's contents into a future Cursor configuration repository.
+Skills guide tool use without enabling integrations or granting permissions. There is no mandatory cross-harness PR automation.
 
 ## Python Environment Wrappers
 

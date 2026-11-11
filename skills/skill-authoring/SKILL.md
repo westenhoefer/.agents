@@ -19,6 +19,6 @@ Editorial principles for this skill library, calibrated for current-generation m
 
 - Description states WHEN to read the skill, in third person, with concrete trigger terms. Do not summarize the body.
 - Body matches the description after edits.
-- Cross-references name the skill (e.g. "the `verification` skill"), not relative paths.
+- Cross-references name the skill (e.g. "the `engineering-practices` skill"), not relative paths.
 - Strict rules carry their rationale.
 - Nothing restates a rule owned by another skill.
