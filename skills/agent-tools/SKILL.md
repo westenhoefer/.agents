@@ -10,7 +10,7 @@ Use the tool that exists, within the authority already granted. A skill, role, i
 Keep workflow judgment in `development-workflow` and artifact/check quality in `engineering-practices`. Read the relevant operational reference before using its tool family:
 
 - [Browser](references/browser.md): tab access flags, ownership, revocation and background focus.
-- [Diagrams](references/diagrams.md): source-backed Mermaid and persistent diagram delivery.
+- [Diagrams](references/diagrams.md): logical component maps, source-backed Mermaid and persistent diagram delivery.
 - [Switchboard](references/switchboard.md): availability, stable retry identity and pending-question handling.
 - [Pi subagents](references/pi-subagents.md): fresh-context assignments, fixed swarms, evidence, launch settings and recovery.
 - [Worktrees](references/worktrees.md): authorization, base/dirty-work inspection, actual runtime limits and exact-target cleanup.
