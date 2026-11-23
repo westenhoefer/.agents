@@ -2,9 +2,11 @@
 
 Read before proposing, creating, using or cleaning a worktree for agent work. Worktrees are optional coordination tools, not a universal workflow or security boundary. Creation/cleanup must already be authorized; this reference grants no permission.
 
-## Match the runtime that exists
+## Launch in a separate checkout
 
-Pi's current direct-child/swarm tools expose no public per-child cwd or worktree parameter. A swarm uses one launch/cwd, shared by its children. Putting a different path or "use a worktree" in the task instruction does not implement isolated execution. Do not invent parameters, alternate launch protocols or automatic worktree management. If isolated execution is required, stop and request a supported, separately authorized arrangement; worktree-runtime implementation is separate work.
+Use `worktree: true` on `subagent_start` or `swarm_start` when authorized work needs separate checkouts. Pi provisions a detached worktree per admitted child from the trusted source checkout’s committed HEAD at submission; queued swarm members keep that base on resume. Without the option children share the launch cwd. A path in a task or CSV cell does not change it. If the loaded tool schema lacks the option, reload the updated extension before relying on it.
+
+The child starts at the new worktree root, without the source checkout’s staged, unstaged or untracked files. If the task depends on those files, resolve the base with the user rather than silently starting from an older version or committing on their behalf. Review the retained checkout named in direct status or the item’s `worktreePath` in swarm results. A reported path is a planned destination, not proof that setup or execution succeeded; check the outcome and inspect the actual diff there. Pi does not merge or remove it.
 
 ## For supported, authorized Git work
 

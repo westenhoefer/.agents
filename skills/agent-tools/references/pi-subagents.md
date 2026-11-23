@@ -8,7 +8,7 @@ Use `subagent_start` for one self-contained assignment or interactive handoff, a
 
 Children start fresh with only the shared instruction and their single task/row—not the parent conversation, other rows, nested delegation or MCP integrations. Have leaves return diagram source and evidence for the parent to publish.
 
-Roles live in `<agent-dir>/agents/`: `worker` implements an authorized scope, `scout` investigates read-only, and `reviewer` reports read-only findings. Give each assignment its objective, relevant context/spec path, exclusive writable scope or read-only boundary, deliverable and verification expectations. Parallelize independent scopes with at most one writer per shared scope; see [Worktrees](worktrees.md) when filesystem isolation is needed.
+Roles live in `<agent-dir>/agents/`: `worker` implements an authorized scope, `scout` investigates read-only, and `reviewer` reports read-only findings. Give each assignment its objective, relevant context/spec path, exclusive writable scope or read-only boundary, deliverable and verification expectations. Parallelize independent scopes with at most one writer per shared scope; see [Worktrees](worktrees.md) for opt-in per-child checkouts when writers need separate working files.
 
 ## Submit a fixed batch
 

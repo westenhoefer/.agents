@@ -13,7 +13,7 @@ Keep workflow judgment in `development-workflow` and artifact/check quality in `
 - [Diagrams](references/diagrams.md): logical component maps, source-backed Mermaid and persistent diagram delivery.
 - [Switchboard](references/switchboard.md): availability, stable retry identity and pending-question handling.
 - [Pi subagents](references/pi-subagents.md): fresh-context assignments, fixed swarms, evidence consumption and separate reviews.
-- [Worktrees](references/worktrees.md): authorization, base/dirty-work inspection, actual runtime limits and exact-target cleanup.
+- [Worktrees](references/worktrees.md): per-child checkout selection, base and dirty-work inspection, retention and exact-target cleanup.
 
 ## Pi wiring
 
