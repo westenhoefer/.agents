@@ -12,6 +12,14 @@ Choose the next useful action, not a preset pipeline. Prefer collaboration while
 - Prefer a clear best solution over manufactured alternatives. Existing complexity is evidence to examine, not a constraint to preserve without a reason.
 - Keep decomposition, dependencies, integration and acceptance explicit. Choose review and verification effort for the actual risk, not the size or apparent importance of the task.
 
+## Product work: Linear and Git
+
+- Use the selected or matching issue; if none exists, create it. Ask which project only if the destination is unclear. To delegate a ticket update, launch a worker with `linear: true` and specify the issue or project and intended change.
+- File a discovered TODO only after discussing whether it is worth doing and agreeing its priority and timing. A speculative improvement is not a ticket.
+- Set status by the actual work: **Todo** for agreed high-priority work planned for this week but not started; **In Progress** once active (including design); **Backlog** for later. Link the implementation PR to the issue. Keep it active during review; set **Done** when you verify the PR completing the issue has merged, not when it opens.
+- Comment on consequential design choices: capture the options discussed, the tradeoff, and what was decided and why. Mark unresolved choices as open rather than recording a recommendation as agreement.
+- Deliver implementations on a task branch: commit the scoped changes, push, and open or update the PR against the intended base. Follow [Review and PR coordination](references/review-and-prs.md) for the walkthrough.
+
 ## Read only the relevant reference
 
 - [Design](references/design.md): unresolved boundaries or behavior, evidence-based choices and decision records.

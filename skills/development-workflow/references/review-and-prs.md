@@ -23,6 +23,6 @@ Explain design divergences and whether the implementation or agreed design needs
 
 ## Human review and closeout
 
-Prefer a diagram-assisted human PR review when structure or lifecycle is material: make the changed path and boundaries visible without substituting a diagram for the diff. Include behavior/risk, actual check results and important limits. No findings means no findings in the reviewed scope, not exhaustive proof.
+For a product implementation, deliver the walkthrough on the PR so the user can read it beside the diff. Include as-built diagrams grounded in the changed code and a reading order through the key files and symbols. Call out where to pay particular attention and why (for example, a changed invariant or a failure path), what was verified and what remains untested. Notify the user with the PR link when the walkthrough is ready, not merely when the branch is pushed.
 
 Keep as-built comparisons and review supplements with the task/issue/PR. Capture durable knowledge only where an audience will use it: canonical docs for operation/contracts, repo instructions for recurring conventions, a local script/skill for repeatable risky work, personal skills for cross-project preferences. Skip empty debt/capture sections. Independent cleanup proposals follow `engineering-practices` refactoring guidance; they are not automatic new work.

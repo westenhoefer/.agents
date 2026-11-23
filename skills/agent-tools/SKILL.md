@@ -19,4 +19,4 @@ Keep workflow judgment in `development-workflow` and artifact/check quality in `
 
 MCP Browser tools use Pi's built-in MCP support and `codemode`. Use `searchTools(query)` for matching tool declarations, or list names with `describeNamespace("mcp__mcp_browser")` then use `describeTool(name)` for schemas; call `tools.mcp__mcp_browser__<tool>()` inside a codemode script. Tool references name operations, not copied schemas or advertisements. Do not change MCP configuration/advertisements merely to make an operation available.
 
-Pi leaf subagents do not load MCP integrations. They return diagram source and evidence for the parent to publish. If a required integration is absent, report the limit rather than improvising an unapproved execution path.
+Pi leaves do not inherit the parent’s MCP tools. See the Pi subagents reference for the per-launch Linear exception. They return diagram source and evidence for the parent to publish. If a required integration is absent, report the limit rather than improvising an unapproved execution path.
